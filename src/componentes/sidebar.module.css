@@ -1,0 +1,66 @@
+.sidebar {
+  width: 220px;
+  min-height: 100vh;
+  background-color: #0d0d0d;
+  padding: 24px 16px;
+  position: fixed;
+  top: 0; left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  border-right: 1px solid #333;
+}
+
+.logo h1 { color: #c026d3; font-size: 1.4rem;
+           font-family: 'Orbitron', monospace; font-weight: 700;
+           letter-spacing: 0.05em; }
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.link {
+  color: #888;
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.link:hover {
+  color: #c026d3;
+  background-color: #1a1a1a;
+}
+
+/* NavLink adiciona .ativo automaticamente quando a rota está ativa */
+.ativo {
+  color: #c026d3;
+  font-weight: 700;
+  background-color: #1a1a1a;
+}
+
+.btn-sair {
+  padding: 10px 22px;
+  background-color: #EF4444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  margin-top: auto;
+}
+
+.btn-sair:hover {
+  background-color: #DC2626;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.btn-sair:active {
+  transform: scale(0.95);
+}

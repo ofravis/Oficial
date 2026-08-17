@@ -1,0 +1,465 @@
+/* ═══════════════════════════════════════════════════════════
+   TASKFLOW — index.css
+   Programador Full Stack · SENAI CTGAS-ER · Prof. Alan Glei
+   Semana 2 (HTML + CSS) + Semana 3 (JavaScript no Navegador)
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── 1. RESET ─────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #0d0d0d;
+  color: white;
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Orbitron", monospace;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* ── 4. HEADER ────────────────────────────────────────────── */
+header {
+  background-color: #1a1a1a;
+  border-bottom: 1px solid #c026d3;
+  padding: 20px 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.logo h1 {
+  color: #d135e6;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.logo p {
+  color: #bbffc4;
+  font-size: 0.85rem;
+}
+
+/* ── 5. CONTADORES ────────────────────────────────────────── */
+#contadores {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: #94a3b8;
+  flex-wrap: wrap;
+}
+
+#cont-total {
+  color: #66bdf0;
+  font-weight: 600;
+}
+#cont-pendentes {
+  color: #f5c21c;
+  font-weight: 600;
+}
+#cont-concluidas {
+  color: #71e255;
+  font-weight: 600;
+}
+
+.separador {
+  color: #334155;
+  user-select: none;
+}
+
+main {
+  padding: 28px 0;
+  flex: 1;
+}
+
+#formulario {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.campo-linha {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.input-tarefa {
+  flex: 1;
+  min-width: 180px;
+  padding: 10px 14px;
+  background-color: #1b2a3b;
+  color: white;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.input-tarefa::placeholder {
+  color: #4a6480;
+}
+
+.input-tarefa:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+}
+
+#sel-prioridade {
+  padding: 10px 12px;
+  background-color: #1b2a3b;
+  color: white;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+#sel-prioridade:focus {
+  border-color: #38bdf8;
+}
+
+#btn-adicionar {
+  padding: 10px 22px;
+  background-color: #2397f5;
+  color: #0d1b2a;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 2px 8px rgba(245, 166, 35, 0.25);
+  white-space: nowrap;
+}
+
+#btn-adicionar:hover {
+  background-color: #13d0f1;
+  box-shadow: 0 4px 14px rgba(35, 109, 245, 0.4);
+}
+
+#btn-adicionar:active {
+  background-color: #0d82b8;
+  transform: scale(0.97);
+  box-shadow: none;
+}
+
+#btn-adicionar:focus {
+  outline: 2px solid #38bdf8;
+  outline-offset: 2px;
+}
+
+/* ── 8. CONTROLES (FILTROS) ───────────────────────────────── */
+#controles {
+  margin-bottom: 20px;
+}
+
+#filtros {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.btn-filtro {
+  padding: 6px 16px;
+  background-color: transparent;
+  color: #94a3b8;
+  border: 1px solid #334155;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.btn-filtro:hover {
+  border-color: #2327f5;
+  color: #6223f5;
+}
+
+.btn-filtro.ativo {
+  background-color: #f5a623;
+  color: #0d1b2a;
+  border-color: #f5a623;
+  font-weight: 700;
+}
+
+/* ── 9. LISTA DE TAREFAS ──────────────────────────────────── */
+#lista-tarefas {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ── 10. TAREFA ───────────────────────────────────────────── */
+.tarefa {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background-color: #1b2a3b;
+  border: 1px solid #1e3a5f;
+  border-left: 4px solid #94a3b8;
+  border-radius: 6px;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.tarefa:hover {
+  background-color: #1e3a5f;
+}
+
+/* Prioridades — cor da borda esquerda */
+.tarefa.alta {
+  border-left-color: #ef4444;
+}
+.tarefa.media {
+  border-left-color: #f5c21c;
+}
+.tarefa.baixa {
+  border-left-color: #71e255;
+}
+
+/* Estado concluída */
+.tarefa.concluida {
+  opacity: 0.5;
+  border-style: dashed;
+}
+
+.tarefa.concluida .texto-tarefa {
+  text-decoration: line-through;
+  color: #98e491;
+}
+
+/* ── 11. TEXTO DA TAREFA ──────────────────────────────────── */
+.texto-tarefa {
+  flex: 1;
+  font-size: 1rem;
+  cursor: pointer;
+  word-break: break-word;
+}
+
+/* ── 12. BADGE DE PRIORIDADE ──────────────────────────────── */
+.badge-prioridade {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.badge-alta {
+  background-color: rgba(161, 24, 24, 0.15);
+  color: #ef4444;
+}
+.badge-media {
+  background-color: rgba(182, 179, 32, 0.15);
+  color: #f5a623;
+}
+.badge-baixa {
+  background-color: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+}
+
+/* ── 13. BOTÃO DELETAR ────────────────────────────────────── */
+.btn-deletar {
+  background: none;
+  border: none;
+  color: #4a6480;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  line-height: 1;
+  flex-shrink: 0;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.btn-deletar:hover {
+  color: #ef4444;
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+/* ── 14. MENSAGEM VAZIA ───────────────────────────────────── */
+.msg-vazia {
+  text-align: center;
+  color: #4a6480;
+  font-size: 0.95rem;
+  padding: 40px 0;
+  font-style: italic;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ── 15. FOOTER ───────────────────────────────────────────── */
+footer {
+  padding: 20px 16px;
+  text-align: center;
+  color: #4a6480;
+  font-size: 0.85rem;
+  border-top: 1px solid #1e3a5f;
+  margin-top: auto;
+}
+
+.kanban-quadro {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-top: 24px;
+  padding-bottom: 32px;
+  overflow-x: auto;
+}
+
+/* ── COLUNA INDIVIDUAL ───────────────────────────────────── */
+.kanban-coluna {
+  flex: 1;
+  min-width: 220px;
+  background-color: #1b2a3b;
+  border: 1px solid #1e3a5f;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+/* ── CABEÇALHO DA COLUNA: título + contador ──────────────── */
+.kanban-coluna-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #334155;
+}
+
+.kanban-coluna-header h3 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ── CONTADOR DE TAREFAS NA COLUNA ──────────────────────── */
+.kanban-contador {
+  background-color: #334155;
+  color: #94a3b8;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 10px;
+  min-width: 20px;
+  text-align: center;
+}
+
+/* ── AÇÕES DO CABEÇALHO DA COLUNA: contador + botão de nova tarefa ── */
+.kanban-coluna-acoes {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.kanban-btn-add {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2397f5;
+  color: #0d1b2a;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.kanban-btn-add:hover {
+  background-color: #13d0f1;
+}
+
+.kanban-btn-add:active {
+  background-color: #0d82b8;
+  transform: scale(0.92);
+}
+
+/* ── LISTA DE TAREFAS DENTRO DA COLUNA ──────────────────── */
+.kanban-lista {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 60px; /* altura mínima mesmo quando a coluna está vazia */
+}
+
+/* ── AJUSTE DO TAREFAITEM DENTRO DO KANBAN ───────────────────
+   No modo Kanban o TarefaItem precisa organizar conteúdo
+   em coluna (texto em cima, ações embaixo).
+   Usamos o seletor de descendente para não afetar a lista normal. */
+.kanban-lista .tarefa {
+  flex-direction: column; /* empilha texto + ações verticalmente */
+  align-items: flex-start;
+  gap: 8px;
+}
+
+/* O texto ocupa toda a largura disponível */
+.kanban-lista .tarefa span:first-child {
+  width: 100%;
+}

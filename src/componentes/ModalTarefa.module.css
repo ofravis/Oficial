@@ -1,0 +1,53 @@
+.overlay {
+
+position: fixed; /* fixo independente do scroll */
+inset: 0; /* top:0 right:0 bottom:0 left:0 */
+background: rgba(0,0,0,0.6);
+backdrop-filter: blur(4px); /* desfoca o conteúdo atrás */
+display: flex;
+align-items: center;
+justify-content: center;
+z-index: 100; /* acima de tudo */
+
+}
+
+/* Card: o painel branco com o formulário */
+
+.card {
+
+    background: #1B2A3B;
+border: 1px solid #1E3A5F;
+border-radius: 18px;
+padding: 28px 32px;
+width: 100%;
+max-width: 420px;
+display: flex;
+flex-direction: column;
+gap: 14px;
+
+}
+
+.card input, .card select {
+
+background: #0D1B2A; color: #E2E8F0;
+border: 1px solid #334155; border-radius: 6px;
+padding: 10px 14px; font-size: 1rem;
+font-family: inherit; outline: none;
+}
+
+.card input:focus, .card select:focus { border-color: #38BDF8; }
+.cidade { color: #64748B; font-size: 0.8rem; }
+.botoes { display: flex; gap: 10px; justify-content: flex-end; }
+.botoes button:first-child {
+
+background: none; border: 1px solid #334155;
+color: #94A3B8; border-radius: 6px; padding: 9px 18px; cursor: pointer;
+}
+
+.botoes button:last-child {
+
+background: #1B5E9A; color: white; border: none;
+border-radius: 6px; padding: 9px 18px;
+font-weight: 700; cursor: pointer;
+
+}

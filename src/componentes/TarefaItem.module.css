@@ -1,0 +1,140 @@
+.tarefa {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  border-left: 3px solid #c026d3;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.tarefa:hover {
+  background-color: #252525;
+  border-left-color: #d946ef;
+}
+
+/* Prioridades — cor da borda esquerda */
+.tarefa.alta {
+  border-left-color: #f5231c;
+}
+.tarefa.media {
+  border-left-color: #f5c21c;
+}
+.tarefa.baixa {
+  border-left-color: #71e255;
+}
+
+.conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── TEXTO DA TAREFA ──────────────────────────────────────────────────────── */
+.textoTarefa {
+  flex: 1;
+  font-size: 1rem;
+  cursor: pointer;
+  word-break: break-word;
+}
+
+/* ── CIDADE ─────────────────────────────────────────────────── */
+.cidade {
+  font-size: 0.75rem; /* menor que o texto principal */
+  color: #6692cf; /* cinza discreto */
+  letter-spacing: 0.02em;
+}
+
+/* Estado concluída */
+.tarefa.concluida {
+  opacity: 0.6;
+}
+
+.tarefa.concluida .texto-tarefa {
+  text-decoration: line-through;
+  color: #6692cf;
+}
+
+/* ── BADGE DE PRIORIDADE ──────────────────────────────────────────────────── */
+.badge-prioridade {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.badge-alta {
+  background-color: rgba(217, 70, 239, 0.15);
+  color: #f5231c;
+}
+.badge-media {
+  background-color: rgba(192, 38, 211, 0.15);
+  color: #f5c21c;
+}
+.badge-baixa {
+  background-color: rgba(168, 85, 168, 0.15);
+  color: #71e255;
+}
+
+/* ── CONTAINER DE AÇÕES ── NOVO ───────────────────────────────────────────────
+   Agrupa os botões ← → e X em linha.
+   No modo lista só o X é renderizado.
+   No modo Kanban os três botões aparecem. */
+.acoes {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+/* ── BOTÃO DE MOVER ← → ── NOVO ──────────────────────────────────────────────
+   Renderizado apenas no modo Kanban.
+   Estilo discreto que combina com o visual escuro do projeto. */
+.btnMover {
+  background: none;
+  border: 1px solid #334155;
+  color: #94a3b8;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 2px 7px;
+  border-radius: 4px;
+  line-height: 1.4;
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.btnMover:hover {
+  border-color: #f5a623;
+  color: #f5a623;
+}
+
+/* ── BOTÃO DELETAR X ─────────────────────────────────────────────────────── */
+.btnDeletar {
+  background: none;
+  border: none;
+  color: #97363b;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  line-height: 1;
+  flex-shrink: 0;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.btnDeletar:hover {
+  color: #ef4444;
+  background-color: rgba(239, 68, 68, 0.1);
+}

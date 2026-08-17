@@ -1,0 +1,30 @@
+header {
+  background-color: #0c0c0c;
+  border-bottom: 1px solid #c026d3;
+  padding: 20px 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.logo h1 {
+  color: #c026d3;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.2;
+  font-family: 'Orbitron', monospace;
+  letter-spacing: 0.05em;
+}
+
+.logo p {
+  color: #888;
+  font-size: 0.85rem;
+}

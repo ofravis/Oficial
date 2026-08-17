@@ -1,0 +1,108 @@
+/* Container — fundo escuro */
+.login-container {
+  min-height: 100vh;
+  background-color: #0d0d0d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Card — painel com o formulário */
+.login-card {
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 18px; 
+  
+  padding: 40px 36px;
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.login-logo {
+  color: #c026d3;
+  font-size: 2rem;
+  text-align: center;
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.login-subtitulo {
+  color: #888;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.login-input {
+  background-color: #0d0d0d;
+  color: #E2E8F0;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 11px 14px;
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.login-input:focus {
+  border-color: #c026d3;
+  background-color: #151515;
+}
+
+.login-erro {
+  color: #db2828;
+  background-color: #1a1a1a;
+  border: 1px solid #db2828;
+  border-radius: 6px;
+  padding: 8px 12px;
+  text-align: center;
+  
+}
+
+.shake {
+  animation: shake 0.8s ease-in-out;
+}
+
+
+.login-btn {
+  background-color: #c026d3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 8px;
+}
+
+.login-btn:hover {
+  background-color: #d946ef;
+}
+
+.login-btn:active {
+  transform: scale(0.98);
+}
+
+.login-aviso {
+  color: #666;
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  15%,45%,75% { transform: translateX(-8px); }
+  30%,60%,90% { transform: translateX(8px); }
+}
+
+.shake {
+  animation: shake 0.8s ease-in-out;
+}
+
