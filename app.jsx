@@ -1,10 +1,10 @@
 import { Route, Routes, useLocation } from "react-router";
 import "./app.css";
-import Kanban from "./pages/kanban";
-import Sobre from "./pages/sobre";
-import Login from "./pages/login";
-import Sidebar from "./componentes/sidebar";
-import RotaPrivada from "./componentes/rotaprivada";
+import Kanban from "./src/pages/kanban";
+import Sobre from "./src/pages/sobre";
+import Login from "./src/pages/login";
+import Sidebar from "./src/componentes/sidebar";
+import RotaPrivada from "./src/componentes/rotaprivada";
 
 function App() {
   const location = useLocation();
