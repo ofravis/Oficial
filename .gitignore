@@ -1,0 +1,34 @@
+# Dependências
+node_modules/
+
+# Arquivos de Build / Saída
+dist/
+build/
+.next/
+out/
+
+# Variáveis de Ambiente e Chaves Secretas (Segurança)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Arquivos do Sistema Operacional
+.DS_Store
+Thumbs.db
+
+# Configurações locais de IDEs e Editores
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
