@@ -1,4 +1,4 @@
-import styles from "./TarefaItem.module.css";
+import styles from "./tarefaitem.module.css";
 
 function TarefaItem({
   // Props existentes — sem alteração

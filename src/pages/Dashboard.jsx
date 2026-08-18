@@ -1,4 +1,4 @@
-import ModalTarefa from "../componentes/ModalTarefa";
+import ModalTarefa from "../componentes/modaltarefa";
 
 // Novos estados — substituem texto, cep, prioridade
 

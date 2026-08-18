@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from "react-router";
-import styles from "./Sidebar.module.css";
-import { useAuth } from "../contexts/AuthContext";
+import styles from "./sidebar.module.css";
+import { useAuth } from "../contexts/authcontext";
 
 function Sidebar() {
   const { logado, logout } = useAuth();

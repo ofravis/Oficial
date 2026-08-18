@@ -1,4 +1,4 @@
-import TarefaItem from "./TarefaItem";
+import TarefaItem from "./tarefaitem";
 
 function ListaTarefas({
   tarefas,

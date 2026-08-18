@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import styles from "./ModalTarefa.module.css";
+import styles from "./modaltarefa.module.css";
 import axios from "axios";
 
 function ModalTarefa({

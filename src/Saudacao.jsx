@@ -1,10 +1,10 @@
 function Saudacao() {
-  const nome = 'TaskFlow';
-  const ano  = 2026;
+  const nome = "TaskFlow";
+  const ano = 2026;
   return (
     <div>
       <h1>Olá, {nome}!</h1>
-      <h4>Ok!!!</h4>      
+      <h4>Ok!!!</h4>
       <p>Curso Programador Full Stack {ano}</p>
     </div>
   );

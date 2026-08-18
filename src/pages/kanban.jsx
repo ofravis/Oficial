@@ -1,7 +1,7 @@
-import Header from "../componentes/Header";
-import Contador from "../componentes/Contador";
-import ListaTarefas from "../componentes/ListaTarefas";
-import ModalTarefa from "../componentes/ModalTarefa";
+import Header from "../componentes/header";
+import Contador from "../componentes/contador";
+import ListaTarefas from "../componentes/listatarefas";
+import ModalTarefa from "../componentes/modaltarefa";
 import { useState, useEffect } from "react";
 
 function Kanban() {
@@ -31,7 +31,8 @@ function Kanban() {
   // ── Melhoria: contador de pendentes no título da aba ────────────────────
   useEffect(() => {
     const pendentes = tarefas.filter((t) => !t.concluida).length;
-    document.title = pendentes > 0 ? `(${pendentes}) TaskFlow Hub` : "TaskFlow Hub";
+    document.title =
+      pendentes > 0 ? `(${pendentes}) TaskFlow Hub` : "TaskFlow Hub";
   }, [tarefas]);
 
   // Abre o modal para CRIAR — botão + na coluna, campos vazios
@@ -60,10 +61,7 @@ function Kanban() {
       );
     } else {
       // CRIAR: adiciona nova tarefa na coluna escolhida
-      setTarefas([
-        ...tarefas,
-        { ...dados, id: proximaId, concluida: false },
-      ]);
+      setTarefas([...tarefas, { ...dados, id: proximaId, concluida: false }]);
       setProximaId(proximaId + 1);
     }
   }
@@ -178,7 +176,10 @@ function Kanban() {
               <h3>Em Andamento</h3>
               <div className="kanban-coluna-acoes">
                 <span className="kanban-contador">
-                  {tarefasFiltradas.filter((t) => t.coluna === "andamento").length}
+                  {
+                    tarefasFiltradas.filter((t) => t.coluna === "andamento")
+                      .length
+                  }
                 </span>
                 <button
                   className="kanban-btn-add"
@@ -206,7 +207,10 @@ function Kanban() {
               <h3>Concluído</h3>
               <div className="kanban-coluna-acoes">
                 <span className="kanban-contador">
-                  {tarefasFiltradas.filter((t) => t.coluna === "concluido").length}
+                  {
+                    tarefasFiltradas.filter((t) => t.coluna === "concluido")
+                      .length
+                  }
                 </span>
                 <button
                   className="kanban-btn-add"
