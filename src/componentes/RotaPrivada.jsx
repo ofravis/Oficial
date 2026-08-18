@@ -1,6 +1,6 @@
 // 1. Import do Navigate — vem do react-router
 import { Navigate } from "react-router";
-import { useAuth } from "../contexts/authcontext";
+import { useAuth } from "../contexts/AuthContext";
 
 function RotaPrivada({ children }) {
   const { logado } = useAuth();
