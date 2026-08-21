@@ -5,16 +5,10 @@ import ModalTarefa from "../componentes/modaltarefa";
 import { useState, useEffect } from "react";
 
 function Kanban() {
-  const [proximaId, setProximaId] = useState(1);
-  const [tarefas, setTarefas] = useState(() => {
-    const tarefasSalvas = localStorage.getItem("tarefas");
-    if (!tarefasSalvas) return [];
-    const tarefasConvertidas = JSON.parse(tarefasSalvas);
-    setProximaId(
-      tarefasConvertidas[tarefasConvertidas.length - 1]?.id + 1 || 1,
-    );
-    return Array.isArray(tarefasConvertidas) ? tarefasConvertidas : [];
-  });
+  const [tarefas, setTarefas] = useState([]);
+  const [carregando, setCarregando] = useState(true);
+  const [erro, setErro] = useState("");
+  const URL_API = "https://6a85afa89c451dc67a63f802.mockapi.io/api/v1/tarefas";
 
   // ── Modal: controla criação e edição de tarefas ─────────────────────────
   const [modalAberto, setModalAberto] = useState(false);
@@ -25,16 +19,22 @@ function Kanban() {
   const [filtroPrioridade, setFiltroPrioridade] = useState("todas");
 
   useEffect(() => {
-    localStorage.setItem("tarefas", JSON.stringify(tarefas));
-  }, [tarefas]);
+    async function carregarTarefas() {
+      try {
+        setCarregando(true);
+        setErro("");
+        const resposta = await axios.get(URL_API);
+        setTarefas(resposta.data); // array de tarefas
+      } catch (e) {
+        setErro("Erro ao carregar tarefas. Verifique a conexão.");
+        console.error(e);
+      } finally {
+        setCarregando(false);
+      }
+    }
 
-  // ── Melhoria: contador de pendentes no título da aba ────────────────────
-  useEffect(() => {
-    const pendentes = tarefas.filter((t) => !t.concluida).length;
-    document.title =
-      pendentes > 0 ? `(${pendentes}) TaskFlow Hub` : "TaskFlow Hub";
-  }, [tarefas]);
-
+    carregarTarefas();
+  }, []); // [] = executa uma vez ao montar
   // Abre o modal para CRIAR — botão + na coluna, campos vazios
   function abrirModalCriar(coluna) {
     setTarefaEditando(null); // null = modo criação
@@ -52,6 +52,7 @@ function Kanban() {
     setModalAberto(false);
   }
 
+  // ──────────────────────────────────────────────────────────────
   // Uma função só para criar E editar — decide pelo id em dados
   function salvarTarefa(dados) {
     if (dados.id) {
@@ -66,17 +67,40 @@ function Kanban() {
     }
   }
 
-  // ── Melhoria: confirmação antes de deletar ──────────────────────────────
-  const deletarTarefa = (id) => {
-    const tarefa = tarefas.find((t) => t.id === id);
-    const confirmou = window.confirm(
-      `Excluir a tarefa "${tarefa?.texto}"? Essa ação não pode ser desfeita.`,
-    );
-    if (!confirmou) return;
-    setTarefas(tarefas.filter((tarefa) => tarefa.id !== id));
-  };
+  async function salvarTarefa(dados) {
+    try {
+      if (dados.id !== undefined) {
+        // EDITAR — PUT com id na URL
+        const { data: tarefaEditada } = await axios.put(
+          URL_API + "/" + dados.id,
+          {
+            texto: dados.texto,
+            prioridade: dados.prioridade,
+            cidade: dados.cidade,
+            coluna: dados.coluna,
+          },
+        );
+        setTarefas((t) =>
+          t.map((x) => (x.id === dados.id ? tarefaEditada : x)),
+        );
+      } else {
+        // CRIAR — POST sem id (API gera automaticamente)
+        const { data: novaTarefa } = await axios.post(URL_API, {
+          texto: dados.texto,
+          prioridade: dados.prioridade,
+          cidade: dados.cidade,
+          coluna: dados.coluna,
+        });
+        setTarefas((t) => [...t, novaTarefa]);
+      }
+    } catch (e) {
+      setErro("Erro ao salvar tarefa.");
+      console.error(e);
+    }
+  }
 
-  // ── Sem alteração ─────────────────────────────────────────────────────────
+  // ------------------------------------
+
   const alternarConcluida = (id) => {
     setTarefas(
       tarefas.map((tarefa) =>
@@ -85,19 +109,50 @@ function Kanban() {
     );
   };
 
-  const moverTarefa = (id, novaColuna) => {
-    setTarefas(
-      tarefas.map((tarefa) =>
-        tarefa.id === id
-          ? {
-              ...tarefa,
-              coluna: novaColuna,
-              concluida: novaColuna === "concluido",
-            }
-          : tarefa,
-      ),
+  // ----------------------------------------------
+
+  async function moverTarefa(id, novaColuna) {
+    try {
+      const { data: tarefaMovida } = await axios.patch(
+        URL_API + "/" + id,
+        { coluna: novaColuna }, // só o campo alterado
+      );
+      setTarefas((t) => t.map((x) => (x.id === id ? tarefaMovida : x)));
+    } catch (e) {
+      setErro("Erro ao mover tarefa.");
+    }
+  }
+  // DELETE — remover com confirmação
+  async function deletarTarefa(id) {
+    const confirmado = window.confirm("Deletar esta tarefa?");
+    if (!confirmado) return;
+    try {
+      await axios.delete(URL_API + "/" + id);
+      // Atualiza local APÓS confirmar na API
+      setTarefas((t) => t.filter((x) => x.id !== id));
+    } catch (e) {
+      setErro("Erro ao deletar tarefa.");
+    }
+  }
+
+  //---------------------------------------------------
+  {
+    carregando && (
+      <p style={{ textAlign: "center", color: "#94A3B8" }}>
+        Carregando tarefas...
+      </p>
     );
-  };
+  }
+  {
+    erro && <p style={{ textAlign: "center", color: "#EF4444" }}>{erro}</p>;
+  }
+  {
+    !carregando && !erro && (
+      <div className="kanban-quadro">{/* colunas do Kanban */}</div>
+    );
+  }
+
+  // ── Melhoria: confirmação antes de deletar ──────────────────────────────
 
   // Aplica o filtro de prioridade (se houver) antes de separar por coluna
   const tarefasFiltradas =
