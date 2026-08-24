@@ -1,7 +1,5 @@
 import ModalTarefa from "../componentes/modaltarefa";
 
-// Novos estados — substituem texto, cep, prioridade
-
 const [modalAberto, setModalAberto] = useState(false);
 const [tarefaEditando, setTarefaEditando] = useState(null);
 const [colunaAtiva, setColunaAtiva] = useState("afazer");

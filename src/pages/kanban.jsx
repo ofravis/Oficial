@@ -52,8 +52,18 @@ function Kanban() {
     setModalAberto(false);
   }
 
-  // ──────────────────────────────────────────────────────────────
-  // Uma função só para criar E editar — decide pelo id em dados
+  function salvarTarefa(dados) {
+    if (dados.id) {
+      // EDITAR: atualiza a tarefa mantendo a coluna original
+      setTarefas(
+        tarefas.map((t) => (t.id === dados.id ? { ...t, ...dados } : t)),
+      );
+    } else {
+      // CRIAR: adiciona nova tarefa na coluna escolhida
+      setTarefas([...tarefas, { ...dados, id: proximaId, concluida: false }]);
+      setProximaId(proximaId + 1);
+    }
+  }
 
   async function salvarTarefa(dados) {
     try {

@@ -59,8 +59,7 @@ function Login() {
           </button>
 
           <p className="login-aviso">
-            Este login é apenas para fins didáticos. Credenciais reais vêm no
-            módulo back-end.
+            Insira as credenciais para acessar o Dashboard :) <br />
           </p>
         </div>
       </div>
