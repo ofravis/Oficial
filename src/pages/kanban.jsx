@@ -3,11 +3,14 @@ import Contador from "../componentes/contador";
 import ListaTarefas from "../componentes/listatarefas";
 import ModalTarefa from "../componentes/modaltarefa";
 import { useState, useEffect } from "react";
+import axios from "axios"; // 1. IMPORT DO AXIOS ADICIONADO
 
 function Kanban() {
   const [tarefas, setTarefas] = useState([]);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState("");
+
+  // Altere para "http://localhost:3000/tarefas" se for usar o seu backend Express local
   const URL_API = "https://6a85afa89c451dc67a63f802.mockapi.io/api/v1/tarefas";
 
   // ── Modal: controla criação e edição de tarefas ─────────────────────────
@@ -15,16 +18,17 @@ function Kanban() {
   const [tarefaEditando, setTarefaEditando] = useState(null);
   const [colunaAtiva, setColunaAtiva] = useState("afazer");
 
-  // ── Melhoria: filtro por prioridade nas colunas ─────────────────────────
+  // ── Filtro por prioridade ─────────────────────────
   const [filtroPrioridade, setFiltroPrioridade] = useState("todas");
 
+  // CARREGAR TAREFAS (GET)
   useEffect(() => {
     async function carregarTarefas() {
       try {
         setCarregando(true);
         setErro("");
         const resposta = await axios.get(URL_API);
-        setTarefas(resposta.data); // array de tarefas
+        setTarefas(resposta.data);
       } catch (e) {
         setErro("Erro ao carregar tarefas. Verifique a conexão.");
         console.error(e);
@@ -34,125 +38,111 @@ function Kanban() {
     }
 
     carregarTarefas();
-  }, []); // [] = executa uma vez ao montar
-  // Abre o modal para CRIAR — botão + na coluna, campos vazios
+  }, []);
+
+  // Controladores do Modal
   function abrirModalCriar(coluna) {
-    setTarefaEditando(null); // null = modo criação
+    setTarefaEditando(null);
     setColunaAtiva(coluna);
     setModalAberto(true);
   }
 
-  // Abre o modal para EDITAR — duplo clique no card, campos preenchidos
   function abrirModalEditar(tarefa) {
-    setTarefaEditando(tarefa); // objeto = modo edição
+    setTarefaEditando(tarefa);
     setModalAberto(true);
   }
 
   function fecharModal() {
     setModalAberto(false);
+    setTarefaEditando(null);
   }
 
-  function salvarTarefa(dados) {
-    if (dados.id) {
-      // EDITAR: atualiza a tarefa mantendo a coluna original
-      setTarefas(
-        tarefas.map((t) => (t.id === dados.id ? { ...t, ...dados } : t)),
-      );
-    } else {
-      // CRIAR: adiciona nova tarefa na coluna escolhida
-      setTarefas([...tarefas, { ...dados, id: proximaId, concluida: false }]);
-      setProximaId(proximaId + 1);
-    }
-  }
-
+  // SALVAR TAREFA (POST / PUT) - Função Única e Unificada
   async function salvarTarefa(dados) {
     try {
-      if (dados.id !== undefined) {
-        // EDITAR — PUT com id na URL
+      setErro("");
+
+      // Se possui ID válido (diferente de null/undefined), é EDITAR (PUT)
+      if (dados.id) {
         const { data: tarefaEditada } = await axios.put(
-          URL_API + "/" + dados.id,
+          `${URL_API}/${dados.id}`,
           {
             texto: dados.texto,
             prioridade: dados.prioridade,
             cidade: dados.cidade,
-            coluna: dados.coluna,
+            coluna: dados.coluna || colunaAtiva,
           },
         );
-        setTarefas((t) =>
-          t.map((x) => (x.id === dados.id ? tarefaEditada : x)),
+
+        setTarefas((prev) =>
+          prev.map((t) => (t.id === dados.id ? tarefaEditada : t)),
         );
       } else {
-        // CRIAR — POST sem id (API gera automaticamente)
+        // Se NÃO possui ID, é CRIAR (POST)
         const { data: novaTarefa } = await axios.post(URL_API, {
           texto: dados.texto,
-          prioridade: dados.prioridade,
-          cidade: dados.cidade,
-          coluna: dados.coluna,
+          prioridade: dados.prioridade || "media",
+          cidade: dados.cidade || "",
+          coluna: dados.coluna || colunaAtiva, // Usa coluna passada ou a coluna onde clicou no +
         });
-        setTarefas((t) => [...t, novaTarefa]);
+
+        setTarefas((prev) => [...prev, novaTarefa]);
       }
+
+      fecharModal(); // Fecha o modal após o sucesso
     } catch (e) {
-      setErro("Erro ao salvar tarefa.");
+      setErro(
+        "Erro ao salvar tarefa. Verifique se os campos obrigatórios estão preenchidos.",
+      );
       console.error(e);
     }
   }
 
-  // ------------------------------------
-
+  // ALTERAR CONCLUÍDA
   const alternarConcluida = (id) => {
-    setTarefas(
-      tarefas.map((tarefa) =>
+    setTarefas((prev) =>
+      prev.map((tarefa) =>
         tarefa.id === id ? { ...tarefa, concluida: !tarefa.concluida } : tarefa,
       ),
     );
   };
 
-  // ----------------------------------------------
-
+  // MOVER TAREFA DE COLUNA (PUT)
   async function moverTarefa(id, novaColuna) {
     try {
-      const { data: tarefaMovida } = await axios.patch(
-        URL_API + "/" + id,
-        { coluna: novaColuna }, // só o campo alterado
-      );
-      setTarefas((t) => t.map((x) => (x.id === id ? tarefaMovida : x)));
+      setErro("");
+      // Busca a tarefa atual no estado
+      const tarefaAtual = tarefas.find((t) => t.id === id);
+      if (!tarefaAtual) return;
+
+      // Utiliza PUT em vez de PATCH
+      const { data: tarefaMovida } = await axios.put(`${URL_API}/${id}`, {
+        ...tarefaAtual,
+        coluna: novaColuna,
+      });
+
+      setTarefas((prev) => prev.map((t) => (t.id === id ? tarefaMovida : t)));
     } catch (e) {
-      setErro("Erro ao mover tarefa.");
+      setErro("Erro ao mover tarefa. Verifique se o servidor está rodando.");
+      console.error(e);
     }
   }
-  // DELETE — remover com confirmação
+
+  // DELETAR TAREFA (DELETE)
   async function deletarTarefa(id) {
     const confirmado = window.confirm("Deletar esta tarefa?");
     if (!confirmado) return;
+
     try {
-      await axios.delete(URL_API + "/" + id);
-      // Atualiza local APÓS confirmar na API
-      setTarefas((t) => t.filter((x) => x.id !== id));
+      await axios.delete(`${URL_API}/${id}`);
+      setTarefas((prev) => prev.filter((t) => t.id !== id));
     } catch (e) {
       setErro("Erro ao deletar tarefa.");
+      console.error(e);
     }
   }
 
-  //---------------------------------------------------
-  {
-    carregando && (
-      <p style={{ textAlign: "center", color: "#94A3B8" }}>
-        Carregando tarefas...
-      </p>
-    );
-  }
-  {
-    erro && <p style={{ textAlign: "center", color: "#EF4444" }}>{erro}</p>;
-  }
-  {
-    !carregando && !erro && (
-      <div className="kanban-quadro">{/* colunas do Kanban */}</div>
-    );
-  }
-
-  // ── Melhoria: confirmação antes de deletar ──────────────────────────────
-
-  // Aplica o filtro de prioridade (se houver) antes de separar por coluna
+  // Aplicar filtro de prioridade
   const tarefasFiltradas =
     filtroPrioridade === "todas"
       ? tarefas
@@ -160,12 +150,12 @@ function Kanban() {
 
   return (
     <>
-      {/* Sem alteração */}
       <Contador
         total={tarefas.length}
         pendentes={tarefas.filter((t) => !t.concluida).length}
         concluidas={tarefas.filter((t) => t.concluida).length}
       />
+
       <Header
         titulo="TaskFlow Hub"
         subtitulo="Gerencie suas tarefas"
@@ -173,9 +163,27 @@ function Kanban() {
       />
 
       <main className="container">
+        {/* Exibição de Mensagens de Estado */}
+        {carregando && (
+          <p style={{ textAlign: "center", color: "#94A3B8" }}>
+            Carregando tarefas...
+          </p>
+        )}
+
+        {erro && (
+          <p
+            style={{
+              textAlign: "center",
+              color: "#EF4444",
+              fontWeight: "bold",
+            }}
+          >
+            {erro}
+          </p>
+        )}
+
         <section id="formulario">
           <div className="campo-linha">
-            {/* Filtro por prioridade — afeta as três colunas do quadro */}
             <select
               id="sel-prioridade"
               value={filtroPrioridade}
@@ -189,17 +197,13 @@ function Kanban() {
           </div>
         </section>
 
-        {/*
-          ── MODIFICAÇÃO 3: quadro Kanban ──────────────────────────────────────
-          Estilos em index.css — seção "16. KANBAN"
-          Cada coluna tem um botão "+" que abre o modal já na coluna certa.
-        */}
+        {/* Quadro Kanban */}
         <div className="kanban-quadro">
+          {/* Coluna: A Fazer */}
           <div className="kanban-coluna">
             <div className="kanban-coluna-header">
               <h3>A Fazer</h3>
               <div className="kanban-coluna-acoes">
-                {/* Contador usa array completo para mostrar o total real */}
                 <span className="kanban-contador">
                   {tarefasFiltradas.filter((t) => t.coluna === "afazer").length}
                 </span>
@@ -224,6 +228,7 @@ function Kanban() {
             />
           </div>
 
+          {/* Coluna: Em Andamento */}
           <div className="kanban-coluna">
             <div className="kanban-coluna-header">
               <h3>Em Andamento</h3>
@@ -255,6 +260,7 @@ function Kanban() {
             />
           </div>
 
+          {/* Coluna: Concluído */}
           <div className="kanban-coluna">
             <div className="kanban-coluna-header">
               <h3>Concluído</h3>
@@ -288,7 +294,7 @@ function Kanban() {
         </div>
       </main>
 
-      {/* Modal — único, fora das colunas, cuida de criar e editar */}
+      {/* Modal de Criação / Edição */}
       <ModalTarefa
         aberto={modalAberto}
         onFechar={fecharModal}
