@@ -15,11 +15,10 @@ function Login() {
 
   async function handleLogin() {
     if (usuario === "admin" && senha === "1234") {
-      await login(); // aguarda o login ser concluído
-      navigate("/"); // redireciona — chamado APÓS a ação
+      await login();
+      navigate("/");
       return;
     }
-    // Credenciais erradas → exibe mensagem de erro
     setErro("Usuário ou senha incorretos");
     setShake(true);
     setTimeout(() => setErro(""), 3000);
@@ -27,17 +26,15 @@ function Login() {
   }
   return (
     <div className="login-container">
-      {/* Sidebar esquerda com formulário */}
       <div className="login-sidebar">
         <div className={`login-card ${shake ? "shake" : ""}`}>
           <h1 className="login-logo">TaskFlow </h1>
           <p className="login-subtitulo">Faça login para continuar</p>
 
-          {/* Input de usuário — estado controlado */}
           <input
             className="login-input"
             type="text"
-            placeholder="Usuário"
+            placeholder="Ex: Usuário123"
             value={usuario}
             onChange={(e) => setUsuario(e.target.value)}
           />
@@ -62,7 +59,6 @@ function Login() {
             </button>
           </div>
 
-          {/* Mensagem de erro — renderização condicional com && */}
           {erro && <p className="login-erro">{erro}</p>}
 
           <button className="login-btn" onClick={handleLogin}>

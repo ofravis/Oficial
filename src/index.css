@@ -1,4 +1,3 @@
-/* ── 1. RESET ─────────────────────────────────────────────── */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -33,7 +32,6 @@ h6 {
   padding: 0 16px;
 }
 
-/* ── 4. HEADER ────────────────────────────────────────────── */
 header {
   background-color: #1a1a1a;
   border-bottom: 1px solid #c026d3;
@@ -52,9 +50,9 @@ header .container {
 }
 
 .logo h1 {
-  color: #d135e6;
-  font-size: 1.6rem;
-  font-weight: 700;
+  color: #e148f5;
+  font-size: 2.3rem;
+  font-weight: 750;
   line-height: 1.2;
 }
 
@@ -63,7 +61,6 @@ header .container {
   font-size: 0.85rem;
 }
 
-/* ── 5. CONTADORES ────────────────────────────────────────── */
 #contadores {
   display: flex;
   align-items: center;
@@ -82,7 +79,7 @@ header .container {
   font-weight: 600;
 }
 #cont-concluidas {
-  color: #71e255;
+  color: #51e476;
   font-weight: 600;
 }
 
@@ -152,7 +149,7 @@ main {
 
 #btn-adicionar {
   padding: 10px 22px;
-  background-color: #2397f5;
+  background-color: #9a36ec;
   color: #0d1b2a;
   border: none;
   border-radius: 6px;
@@ -169,18 +166,18 @@ main {
 }
 
 #btn-adicionar:hover {
-  background-color: #13d0f1;
-  box-shadow: 0 4px 14px rgba(35, 109, 245, 0.4);
+  background-color: #8613f1;
+  box-shadow: 0 4px 14px rgba(144, 35, 245, 0.4);
 }
 
 #btn-adicionar:active {
-  background-color: #0d82b8;
+  background-color: #880db8;
   transform: scale(0.97);
   box-shadow: none;
 }
 
 #btn-adicionar:focus {
-  outline: 2px solid #38bdf8;
+  outline: 2px solid #ab38f8;
   outline-offset: 2px;
 }
 
@@ -211,8 +208,8 @@ main {
 }
 
 .btn-filtro:hover {
-  border-color: #2327f5;
-  color: #6223f5;
+  border-color: #4323f5;
+  color: #5c2cca;
 }
 
 .btn-filtro.ativo {
@@ -273,7 +270,6 @@ main {
   color: #98e491;
 }
 
-/* ── 11. TEXTO DA TAREFA ──────────────────────────────────── */
 .texto-tarefa {
   flex: 1;
   font-size: 1rem;
@@ -281,7 +277,6 @@ main {
   word-break: break-word;
 }
 
-/* ── 12. BADGE DE PRIORIDADE ──────────────────────────────── */
 .badge-prioridade {
   font-size: 0.7rem;
   font-weight: 700;
@@ -306,7 +301,6 @@ main {
   color: #22c55e;
 }
 
-/* ── 13. BOTÃO DELETAR ────────────────────────────────────── */
 .btn-deletar {
   background: none;
   border: none;
@@ -319,15 +313,14 @@ main {
   flex-shrink: 0;
   transition:
     color 0.15s ease,
-    background-color 0.15s ease;
+    background-color transparent;
 }
 
 .btn-deletar:hover {
   color: #ef4444;
-  background-color: rgba(239, 68, 68, 0.1);
+  background-color: transparent;
 }
 
-/* ── 14. MENSAGEM VAZIA ───────────────────────────────────── */
 .msg-vazia {
   text-align: center;
   color: #4a6480;
@@ -340,7 +333,6 @@ main {
   display: none;
 }
 
-/* ── 15. FOOTER ───────────────────────────────────────────── */
 footer {
   padding: 20px 16px;
   text-align: center;
@@ -359,7 +351,6 @@ footer {
   overflow-x: auto;
 }
 
-/* ── COLUNA INDIVIDUAL ───────────────────────────────────── */
 .kanban-coluna {
   flex: 1;
   min-width: 220px;
@@ -369,7 +360,6 @@ footer {
   padding: 12px;
 }
 
-/* ── CABEÇALHO DA COLUNA: título + contador ──────────────── */
 .kanban-coluna-header {
   display: flex;
   justify-content: space-between;
@@ -387,7 +377,6 @@ footer {
   letter-spacing: 0.06em;
 }
 
-/* ── CONTADOR DE TAREFAS NA COLUNA ──────────────────────── */
 .kanban-contador {
   background-color: #334155;
   color: #94a3b8;
@@ -399,7 +388,6 @@ footer {
   text-align: center;
 }
 
-/* ── AÇÕES DO CABEÇALHO DA COLUNA: contador + botão de nova tarefa ── */
 .kanban-coluna-acoes {
   display: flex;
   align-items: center;
@@ -412,7 +400,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #2397f5;
+  background-color: #a123f5;
   color: #0d1b2a;
   border: none;
   border-radius: 6px;
@@ -426,11 +414,11 @@ footer {
 }
 
 .kanban-btn-add:hover {
-  background-color: #13d0f1;
+  background-color: #bb2ee6;
 }
 
 .kanban-btn-add:active {
-  background-color: #0d82b8;
+  background-color: #9040d1;
   transform: scale(0.92);
 }
 
@@ -443,10 +431,6 @@ footer {
   min-height: 60px; /* altura mínima mesmo quando a coluna está vazia */
 }
 
-/* ── AJUSTE DO TAREFAITEM DENTRO DO KANBAN ───────────────────
-   No modo Kanban o TarefaItem precisa organizar conteúdo
-   em coluna (texto em cima, ações embaixo).
-   Usamos o seletor de descendente para não afetar a lista normal. */
 .kanban-lista .tarefa {
   flex-direction: column; /* empilha texto + ações verticalmente */
   align-items: flex-start;

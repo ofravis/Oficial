@@ -16,7 +16,8 @@
   border-left-color: #d946ef;
 }
 
-/* Prioridades — cor da borda esquerda */
+/* cor da borda esquerda */
+
 .tarefa.alta {
   border-left-color: #f5231c;
 }
@@ -35,7 +36,6 @@
   min-width: 0;
 }
 
-/* ── TEXTO DA TAREFA ──────────────────────────────────────────────────────── */
 .textoTarefa {
   flex: 1;
   font-size: 1rem;
@@ -43,16 +43,14 @@
   word-break: break-word;
 }
 
-/* ── CIDADE ─────────────────────────────────────────────────── */
 .cidade {
-  font-size: 0.75rem; /* menor que o texto principal */
-  color: #6692cf; /* cinza discreto */
+  font-size: 0.75rem;
+  color: #6692cf;
   letter-spacing: 0.02em;
 }
 
-/* Estado concluída */
 .tarefa.concluida {
-  opacity: 0.6;
+  opacity: 0.4;
 }
 
 .tarefa.concluida .texto-tarefa {
@@ -60,7 +58,6 @@
   color: #6692cf;
 }
 
-/* ── BADGE DE PRIORIDADE ──────────────────────────────────────────────────── */
 .badge-prioridade {
   font-size: 0.7rem;
   font-weight: 700;
@@ -73,22 +70,18 @@
 }
 
 .badge-alta {
-  background-color: rgba(217, 70, 239, 0.15);
+  background-color: rgba(235, 36, 36, 0.185);
   color: #f5231c;
 }
 .badge-media {
-  background-color: rgba(192, 38, 211, 0.15);
+  background-color: rgba(211, 194, 38, 0.274);
   color: #f5c21c;
 }
 .badge-baixa {
-  background-color: rgba(168, 85, 168, 0.15);
+  background-color: rgba(36, 170, 47, 0.281);
   color: #71e255;
 }
 
-/* ── CONTAINER DE AÇÕES ── NOVO ───────────────────────────────────────────────
-   Agrupa os botões ← → e X em linha.
-   No modo lista só o X é renderizado.
-   No modo Kanban os três botões aparecem. */
 .acoes {
   display: flex;
   align-items: center;
@@ -96,9 +89,6 @@
   flex-shrink: 0;
 }
 
-/* ── BOTÃO DE MOVER ← → ── NOVO ──────────────────────────────────────────────
-   Renderizado apenas no modo Kanban.
-   Estilo discreto que combina com o visual escuro do projeto. */
 .btnMover {
   background: none;
   border: 1px solid #334155;
@@ -118,7 +108,6 @@
   color: #f5a623;
 }
 
-/* ── BOTÃO DELETAR X ─────────────────────────────────────────────────────── */
 .btnDeletar {
   background: none;
   border: none;

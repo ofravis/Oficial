@@ -6,12 +6,9 @@ function Sidebar() {
   const { logado, logout } = useAuth();
   const navigate = useNavigate();
 
-  // NavLink recebe função em className — isActive vem do Router
   const linkClass = ({ isActive }) =>
     isActive ? styles.link + " " + styles.ativo : styles.link;
 
-  // Sair: desloga e garante o redirecionamento para /login
-  // (necessário mesmo em rotas públicas, como /sobre)
   function handleSair() {
     logout();
     navigate("/login");
@@ -30,6 +27,9 @@ function Sidebar() {
         )}
         <NavLink to="/sobre" className={linkClass}>
           Sobre
+        </NavLink>
+        <NavLink to="/404" className={linkClass}>
+          404
         </NavLink>
       </nav>
       {logado && (

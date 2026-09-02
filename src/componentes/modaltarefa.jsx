@@ -14,8 +14,6 @@ function ModalTarefa({
   const [cidade, setCidade] = useState("");
   const [prioridade, setPrioridade] = useState("media");
 
-  // Preenche os campos ao abrir para edição
-
   useEffect(() => {
     setCep(tarefa?.cep || "");
     if (tarefa) {
@@ -30,7 +28,6 @@ function ModalTarefa({
     }
   }, [tarefa, aberto]);
 
-  // Fecha o modal ao pressionar Esc
   useEffect(() => {
     if (!aberto) return;
     function handleTecla(e) {
@@ -68,9 +65,7 @@ function ModalTarefa({
   if (!aberto) return null;
 
   return (
-    // Overlay: clique fora fecha o modal
     <div className={styles.overlay} onClick={onFechar}>
-      {/* stopPropagation: evita fechar ao clicar dentro do card */}
       <div className={styles.card} onClick={(e) => e.stopPropagation()}>
         <h2>{tarefa ? "Editar tarefa" : "Nova tarefa"}</h2>
         <input
@@ -91,9 +86,9 @@ function ModalTarefa({
           value={prioridade}
           onChange={(e) => setPrioridade(e.target.value)}
         >
-          <option value="alta">Alta</option>
-          <option value="media">Média</option>
-          <option value="baixa">Baixa</option>
+          <option value="alta">🔴Alta</option>
+          <option value="media">🟡Média</option>
+          <option value="baixa">🟢Baixa</option>
         </select>
         <div className={styles.botoes}>
           <button onClick={onFechar}>Cancelar</button>

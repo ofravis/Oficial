@@ -26,6 +26,7 @@ export default function App() {
           />
           <Route path="/sobre" element={<Sobre />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/404" element={<NotFound />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

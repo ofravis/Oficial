@@ -35,18 +35,12 @@ function salvarTarefa(dados) {
   }
 }
 
-{
-  /* Cabeçalho da coluna com botão + */
-}
-
 <div className="kanban-coluna-header">
   <h3>A Fazer</h3>
   <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
     <span className="kanban-contador">
       {tarefas.filter((t) => t.coluna === "afazer").length}
     </span>
-
-    {/* Botão + abre o modal com a coluna pré-selecionada */}
 
     <button
       className="kanban-btn-add"
@@ -71,7 +65,6 @@ function salvarTarefa(dados) {
 />;
 
 {
-  /* Modal — único, fora das colunas, no final do JSX */
 }
 
 <ModalTarefa

@@ -1,0 +1,60 @@
+.pagina {
+  padding: 40px;
+}
+
+.pagina h1,
+.pagina h2,
+.pagina p {
+  margin-bottom: 16px;
+}
+
+.h1 {
+  font-size: 2rem;
+  color: #c026d3;
+  font-family: "Orbitron", monospace;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.shake {
+  animation: shake404 0.5s;
+}
+
+.erro404 {
+  color: #ef4444;
+  font-size: 3rem;
+  text-align: center;
+  margin-top: 16px;
+}
+
+@keyframes shake404 {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20%,
+  60% {
+    transform: translateX(-8px);
+  }
+  40%,
+  80% {
+    transform: translateX(8px);
+  }
+}
+
+.btnNothing {
+  padding: 16px 24px;
+  background-color: #4488ef;
+  color: white;
+  border: none;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    transform 0.1s ease,
+    box-shadow 0.3s ease;
+  margin-top: auto;
+}

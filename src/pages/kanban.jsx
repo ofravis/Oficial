@@ -96,7 +96,6 @@ function Kanban() {
     }
   }
 
-  // ALTERAR CONCLUÍDA
   const alternarConcluida = (id) => {
     setTarefas((prev) =>
       prev.map((tarefa) =>
@@ -105,7 +104,6 @@ function Kanban() {
     );
   };
 
-  // MOVER TAREFA DE COLUNA (PUT)
   async function moverTarefa(id, novaColuna) {
     try {
       setErro("");
@@ -157,9 +155,8 @@ function Kanban() {
       />
 
       <main className="container">
-        {/* Exibição de Mensagens de Estado */}
         {carregando && (
-          <p style={{ textAlign: "center", color: "#94A3B8" }}>
+          <p style={{ textAlign: "center", color: "#4a94fd" }}>
             Carregando tarefas...
           </p>
         )}
@@ -288,7 +285,6 @@ function Kanban() {
         </div>
       </main>
 
-      {/* Modal de Criação / Edição */}
       <ModalTarefa
         aberto={modalAberto}
         onFechar={fecharModal}

@@ -1,15 +1,13 @@
 .overlay {
-  position: fixed; /* fixo independente do scroll */
-  inset: 0; /* top:0 right:0 bottom:0 left:0 */
+  position: fixed;
+  inset: 0;
   background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(4px); /* desfoca o conteúdo atrás */
+  backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 100; /* acima de tudo */
+  z-index: 100;
 }
-
-/* Card: o painel branco com o formulário */
 
 .card {
   background: #1b2a3b;
