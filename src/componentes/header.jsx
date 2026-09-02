@@ -14,11 +14,11 @@ function Header({ titulo, subtitulo = "Informe o subtítulo", tarefas = [] }) {
         </div>
 
         <div id="contadores">
-          <span id="cont-total">{`${Total} tarefas`}</span>
+          <span id="cont-total">{`${Total} Tarefas`}</span>
           <span className="separador">·</span>
-          <span id="cont-pendentes">{`${Pendentes} pendentes`}</span>
+          <span id="cont-pendentes">{`${Pendentes} Pendentes`}</span>
           <span className="separador">·</span>
-          <span id="cont-concluidas">{`${Concluidas} concluídas`}</span>
+          <span id="cont-concluidas">{`${Concluidas} Concluídas`}</span>
         </div>
       </div>
     </header>

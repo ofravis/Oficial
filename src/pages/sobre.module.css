@@ -1,16 +1,26 @@
-.btn-nothing {
-  padding: 10px 22px;
+.pagina {
+  padding: 40px;
+}
+
+.pagina h1,
+.pagina h2,
+.pagina p {
+  margin-bottom: 16px;
+}
+
+.btnNothing {
+  padding: 20px 36px;
   background-color: #4488ef;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 999px;
   font-size: 1rem;
   font-weight: 700;
   font-family: inherit;
   cursor: pointer;
   transition:
-    background-color 0.2s ease,
+    background-color 0.3s ease,
     transform 0.1s ease,
-    box-shadow 0.2s ease;
+    box-shadow 0.3s ease;
   margin-top: auto;
 }

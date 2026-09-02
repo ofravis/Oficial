@@ -3,19 +3,17 @@ import "./app.css";
 import Kanban from "./pages/kanban.jsx";
 import Sobre from "./pages/sobre.jsx";
 import Login from "./pages/login.jsx";
+import NotFound from "./pages/404.jsx";
 import Sidebar from "./componentes/sidebar.jsx";
 import RotaPrivada from "./componentes/rotaprivada.jsx";
 
-function App() {
+export default function App() {
   const location = useLocation();
   const isLoginPage = location.pathname === "/login";
 
   return (
     <div className="app-layout">
-      {/* Sidebar aparece apenas fora da página de login */}
       {!isLoginPage && <Sidebar />}
-
-      {/* Conteúdo principal — muda conforme a URL */}
       <main className="app-conteudo">
         <Routes>
           <Route
@@ -26,14 +24,11 @@ function App() {
               </RotaPrivada>
             }
           />
-          {/* Rota pública — acessível sem login */}
           <Route path="/sobre" element={<Sobre />} />
           <Route path="/login" element={<Login />} />
-          <Route path="*" element={<h1>Página não encontrada</h1>} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
     </div>
   );
 }
-
-export default App;

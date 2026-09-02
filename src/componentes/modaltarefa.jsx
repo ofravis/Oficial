@@ -65,7 +65,6 @@ function ModalTarefa({
     onFechar();
   }
 
-  // Modal fechado não renderiza nada
   if (!aberto) return null;
 
   return (

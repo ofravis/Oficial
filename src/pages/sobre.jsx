@@ -1,12 +1,19 @@
+import styles from "./sobre.module.css";
+
 function Sobre() {
   return (
-    <div>
+    <div className={styles.pagina}>
       <h1>Sobre</h1>
-      <h2>nothing to see yet.</h2>
-      <p>página simples como teste para o projeto</p>
-      <p>'-'</p>
+      <h2>TaskFlow</h2>
+      <p>
+        Página simples como teste para o projeto "TaskFlow" - Aluno Flávio
+        Azevedo - Prof. Alan Glei
+      </p>
+      <p>SENAI CTGAS-ER</p>
 
-      <button className="btn-nothing"> Faz nada'-' </button>
+      <button className={styles.btnNothing} type="button">
+        TaskFlow
+      </button>
     </div>
   );
 }

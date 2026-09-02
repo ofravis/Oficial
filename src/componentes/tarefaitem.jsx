@@ -1,7 +1,6 @@
 import styles from "./tarefaitem.module.css";
 
 function TarefaItem({
-  // Props existentes — sem alteração
   texto,
   concluida = false,
   prioridade = "media",
@@ -9,8 +8,6 @@ function TarefaItem({
   onDeletar,
   onConcluir,
 
-  // Props novas — opcionais, com valor padrão null
-  // Recebidas via ListaTarefas, que injeta o tarefa.id no onMover/onEditar
   onMover = null,
   onEditar = null,
   colunaAnterior = null,
@@ -34,11 +31,6 @@ function TarefaItem({
 
   return (
     <li className={classeItem}>
-      {/* Texto da tarefa — duplo clique para concluir (funciona nos dois modos) */}
-      {/* <span className={classeTexto} onDoubleClick={onConcluir}>
-          {texto}
-        </span> */}
-
       <div className={styles.conteudo}>
         {/* Duplo clique abre o modal de edição com os dados preenchidos */}
         <span

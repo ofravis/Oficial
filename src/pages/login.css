@@ -54,6 +54,39 @@
   background-color: #151515;
 }
 
+.login-senha-wrapper {
+  position: relative;
+}
+
+.login-senha-input {
+  width: 100%;
+  padding-right: 82px;
+}
+
+.login-senha-toggle {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background: transparent;
+  color: #c026d3;
+  border: 0;
+  padding: 4px;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.login-senha-toggle:hover {
+  color: #d946ef;
+}
+
+.login-senha-toggle:focus-visible {
+  outline: 2px solid #d946ef;
+  outline-offset: 2px;
+}
+
 .login-erro {
   color: #db2828;
   background-color: #1a1a1a;

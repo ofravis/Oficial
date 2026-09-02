@@ -6,6 +6,7 @@ import "./login.css";
 function Login() {
   const [usuario, setUsuario] = useState("");
   const [senha, setSenha] = useState("");
+  const [mostrarSenha, setMostrarSenha] = useState(false);
   const [erro, setErro] = useState("");
   const [shake, setShake] = useState(false);
   const { login } = useAuth();
@@ -24,7 +25,6 @@ function Login() {
     setTimeout(() => setErro(""), 3000);
     setTimeout(() => setShake(false), 800); // Remove a classe após a animação
   }
-
   return (
     <div className="login-container">
       {/* Sidebar esquerda com formulário */}
@@ -42,14 +42,25 @@ function Login() {
             onChange={(e) => setUsuario(e.target.value)}
           />
 
-          <input
-            className="login-input"
-            type="password"
-            placeholder="Senha"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && handleLogin()}
-          />
+          <div className="login-senha-wrapper">
+            <input
+              className="login-input login-senha-input"
+              type={mostrarSenha ? "text" : "password"}
+              placeholder="Senha"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleLogin()}
+            />
+            <button
+              className="login-senha-toggle"
+              type="button"
+              onClick={() => setMostrarSenha((visivel) => !visivel)}
+              aria-label={mostrarSenha ? "Ocultar senha" : "Mostrar senha"}
+              aria-pressed={mostrarSenha}
+            >
+              {mostrarSenha ? "Ocultar" : "Mostrar"}
+            </button>
+          </div>
 
           {/* Mensagem de erro — renderização condicional com && */}
           {erro && <p className="login-erro">{erro}</p>}

@@ -1,5 +1,4 @@
 import Header from "../componentes/header";
-import Contador from "../componentes/contador";
 import ListaTarefas from "../componentes/listatarefas";
 import ModalTarefa from "../componentes/modaltarefa";
 import { useState, useEffect } from "react";
@@ -62,7 +61,6 @@ function Kanban() {
     try {
       setErro("");
 
-      // Se possui ID válido (diferente de null/undefined), é EDITAR (PUT)
       if (dados.id) {
         const { data: tarefaEditada } = await axios.put(
           `${URL_API}/${dados.id}`,
@@ -130,7 +128,9 @@ function Kanban() {
 
   // DELETAR TAREFA (DELETE)
   async function deletarTarefa(id) {
-    const confirmado = window.confirm("Deletar esta tarefa?");
+    const confirmado = window.confirm(
+      "Deletar esta tarefa? Esta ação não pode ser desfeita.",
+    );
     if (!confirmado) return;
 
     try {
@@ -150,12 +150,6 @@ function Kanban() {
 
   return (
     <>
-      <Contador
-        total={tarefas.length}
-        pendentes={tarefas.filter((t) => !t.concluida).length}
-        concluidas={tarefas.filter((t) => t.concluida).length}
-      />
-
       <Header
         titulo="TaskFlow Hub"
         subtitulo="Gerencie suas tarefas"
